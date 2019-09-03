@@ -1,0 +1,44 @@
+.searchField{
+  border-bottom:1px solid black;
+  padding:20px;
+  width:500px;
+  background-color: #fafafa;
+  font-size:1em;
+  font-weight: 600;
+}
+.searchUser,.searchRepo{
+  width:60%;
+  height:25px;
+  font-weight: 900;
+  border-radius: 5px;
+}
+.searchUser::placeholder,.searchRepo::placeholder{
+  font-size:1em;
+  color:#cecece;
+  font-weight: 600;
+}
+.goButton{
+  width:15%;
+  color:white;
+  background-color: #88bc54;
+  border-radius: 5px;
+}
+.clearUser,.clearRepo{
+  width:15%;
+  background-color: #f4f4f4;
+  color:#943736;
+  border-radius: 5px;
+}
+.user{
+  display: flex;
+  justify-content: space-around;
+}
+.repo{
+  display: flex;
+}
+.searchRepo{
+  margin-left: 6px;
+}
+.clearRepo{
+  margin-left: 18px;
+}
