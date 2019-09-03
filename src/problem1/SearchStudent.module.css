@@ -1,0 +1,35 @@
+.StudentDatabase{
+  display: flex;
+  flex-direction: column;
+}
+.heading{
+  text-align: center;
+}
+.textField{ 
+  margin-top:20px;
+  width:80%;
+  height:20px;
+  margin-bottom:40px;
+  align-self: center;
+  text-align: center;
+}
+.textField::placeholder{
+  font-size:1em;
+  font-weight: 700;
+  text-align: center; 
+}
+.searchDiv{
+  display: flex;
+  flex-direction: column;
+}
+.searchButton{
+  width:40%;
+  align-self: center;
+  height:40px;
+  border-radius: 20px;
+  border:none;
+  color:white;
+  background-color: #4285f4;
+  font-weight: 900;
+  font-size:1em;
+}
