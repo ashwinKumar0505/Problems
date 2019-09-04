@@ -102,12 +102,13 @@ class GitRepo extends Component {
     }
     if (this.state.shouldFilterRepo) {                                   //Filtering the repos
       let filter = this.state.repoName;
+       let Highlight = require('react-highlighter');
       DisplayRepo = this.state.repoNames.map(repo => {
         if (repo.includes(filter)) {
           return (
-            <p className={classes.displayRepo} key={repo}>
-              {repo}
-            </p>
+            <div className={classes.displayRepo} key={repo}>
+            <Highlight search={filter}>{repo}</Highlight>
+            </div>
           );
         } else {
           return null;
