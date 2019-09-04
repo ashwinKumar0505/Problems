@@ -50,6 +50,7 @@ class GitRepo extends Component {
   clearUser = () => {
     this.setState({
       userName: "",
+      repoNames:[],
       shouldClearRepo: true,
       HasRepo: false,
       shouldFilterRepo: false,
@@ -65,6 +66,21 @@ class GitRepo extends Component {
       userNotFound: false,
     });
   };
+  clearFilter=()=>{
+    this.setState({
+      repoName:"",
+      shouldClearRepo: false,
+      HasRepo: true,
+      shouldFilterRepo: true,
+      userNotFound: false
+    })
+  }
+  enterKeyPress=(event)=>{
+    if(event.keyCode===13||event.which===13){
+      console.log('here')
+       this.searchUser();
+     }
+  }
   render() {
     let DisplayRepo = "";
     if (this.state.HasRepo) {                                        //Displaying the repos
@@ -104,11 +120,13 @@ class GitRepo extends Component {
         <div className={classes.Container}>
           <Search
             userName={this.state.userName}
+            repoName={this.state.repoName}
             changeUser={this.changeUser}
             searchUser={this.searchUser}
             clearUser={this.clearUser}
             filterRepo={this.filterRepo}
-            clearRepo={this.clearRepo}
+            clearFilter={this.clearFilter}
+            enterKeyPress={this.enterKeyPress}
           />
           {DisplayRepo}
         </div>
