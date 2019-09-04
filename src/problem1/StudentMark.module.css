@@ -30,3 +30,8 @@
   border: 1px solid #ccc;
 
 }
+@media screen and (max-width:400px){
+  .button{
+    padding:14px 20px;
+  }
+}

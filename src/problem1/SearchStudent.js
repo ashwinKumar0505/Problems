@@ -123,7 +123,12 @@ class SearchStudent extends Component {
       showMarks: true,
     });
   };
-
+  enterKeyPress=(event)=>{
+    console.log("here")
+    if(event.keyCode===13||event.which===13){
+      this.searchPerson();
+    }
+  }
   render() {
     let studentProfile=null;
     if (this.state.showMarks) {
@@ -155,6 +160,7 @@ class SearchStudent extends Component {
             className={classes.textField}
             placeholder="Enter the Student Name"
             onChange={this.storeName}
+            onKeyPress={this.enterKeyPress}
           />
           <input
             type="button"

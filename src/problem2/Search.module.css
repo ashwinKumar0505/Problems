@@ -42,3 +42,15 @@
 .clearRepo{
   margin-left: 18px;
 }
+@media screen and (max-width: 560px){
+  .searchField{
+    width:500px;
+  }
+}
+
+@media screen and (max-width: 460px){
+  .searchField{
+    width:300px;
+    overflow: hidden;
+  }
+}
