@@ -50,40 +50,51 @@ class GitRepo extends Component {
   clearUser = () => {
     this.setState({
       userName: "",
-      repoNames:[],
+      repoNames: [],
       shouldClearRepo: true,
       HasRepo: false,
       shouldFilterRepo: false,
       userNotFound: false,
     });
   };
-  filterRepo = (event) => {
+  filterRepo = event => {
+    if (event.target.value === "") {
+      this.setState({
+        repoName: event.target.value,
+        shouldClearRepo: false,
+        HasRepo: true,
+        shouldFilterRepo: false,
+        userNotFound: false,
+      });
+    } else {
+      this.setState({
+        repoName: event.target.value,
+        shouldClearRepo: false,
+        HasRepo: false,
+        shouldFilterRepo: true,
+        userNotFound: false,
+      });
+    }
+  };
+  clearFilter = () => {
     this.setState({
-      repoName: event.target.value,
+      repoName: "",
       shouldClearRepo: false,
-      HasRepo: false,
+      HasRepo: true,
       shouldFilterRepo: true,
       userNotFound: false,
     });
   };
-  clearFilter=()=>{
-    this.setState({
-      repoName:"",
-      shouldClearRepo: false,
-      HasRepo: true,
-      shouldFilterRepo: true,
-      userNotFound: false
-    })
-  }
-  enterKeyPress=(event)=>{
-    if(event.keyCode===13||event.which===13){
-      console.log('here')
-       this.searchUser();
-     }
-  }
+  enterKeyPress = event => {
+    if (event.keyCode === 13 || event.which === 13) {
+      console.log("here");
+      this.searchUser();
+    }
+  };
   render() {
     let DisplayRepo = "";
-    if (this.state.HasRepo) {                                        //Displaying the repos
+    if (this.state.HasRepo) {
+      //Displaying the repos
       DisplayRepo = this.state.repoNames.map(repo => {
         return (
           <p className={classes.displayRepo} key={repo}>
@@ -92,23 +103,46 @@ class GitRepo extends Component {
         );
       });
     }
-    if (this.state.shouldClearRepo) {                                 //clearing the repos
+    if (this.state.shouldClearRepo) {
+      //clearing the repos
       DisplayRepo = null;
     }
-    if (this.state.userNotFound) {                                     //If userName does not exits
+    if (this.state.userNotFound) {
+      //If userName does not exits
       DisplayRepo = (
         <p className={classes.wrongUserName}>No UserName Exits in This Name</p>
       );
     }
-    if (this.state.shouldFilterRepo) {                                   //Filtering the repos
+    if (this.state.shouldFilterRepo) {
+      //Filtering the repos
       let filter = this.state.repoName;
       DisplayRepo = this.state.repoNames.map(repo => {
         if (repo.includes(filter)) {
-          return (
-            <p className={classes.displayRepo} key={repo}>
-              {repo}
-            </p>
-          );
+          let Display = "";
+          let regrex = new RegExp(filter, "g");
+          let indices = [],
+            result;
+          while ((result = regrex.exec(repo))) {
+            indices.push(result.index);
+          }
+
+          let i = 0,
+            j = filter.length;
+          for (i; i < repo.length; ) {
+            if (indices.includes(i)) {
+              Display = [
+                Display,
+                <span style={{ backgroundColor: "yellow" }}>
+                  {repo.substring(i, i + j)}
+                </span>,
+              ];
+              i = i + j;
+            } else {
+              Display = [Display, <span>{repo[i]}</span>];
+              i = i + 1;
+            }
+          }
+          return <div style={{ padding: "30px",borderBottom: "2px solid #ddd",fontWeight:800,fontSize:"1em" ,marginLeft:"10px"}}>{Display}</div>;
         } else {
           return null;
         }
@@ -134,5 +168,4 @@ class GitRepo extends Component {
     );
   }
 }
-
 export default GitRepo;
